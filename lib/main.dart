@@ -1,4 +1,6 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_calc/calc_two.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,32 +10,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return AdaptiveTheme(
+      light: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.grey,
+        accentColor: Colors.white12,
+        buttonColor: Colors.white12,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      dark: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.red,
+        accentColor: Colors.yellowAccent[400],
+        buttonColor: Colors.redAccent[400],
       ),
-      body: Center(child: Text('CALC')),
+      initial: AdaptiveThemeMode.light,
+      builder: (theme, darkTheme) => MaterialApp(
+        title: 'Adaptive Theme Demo',
+        theme: theme,
+        darkTheme: darkTheme,
+        home: CalcTwo(),
+      ),
     );
   }
 }

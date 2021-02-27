@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  math_expressions: ^2.0.2
+  adaptive_theme: ^1.1.0
   flutter:
     sdk: flutter
 
