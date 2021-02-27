@@ -106,7 +106,7 @@ class _CalcTwoState extends State<CalcTwo> {
             ),
           ),
           Container(
-            decoration: Theme.of(context).buttonColor == Colors.red[300]
+            decoration: Theme.of(context).buttonColor == Colors.redAccent[400]
                 ? BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
