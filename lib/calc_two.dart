@@ -8,8 +8,8 @@ class CalcTwo extends StatefulWidget {
 }
 
 class _CalcTwoState extends State<CalcTwo> {
-  var userInput = 'userinput';
-  var answer = 'answer';
+  var userInput = '';
+  var answer = '';
   @override
   Widget build(BuildContext context) {
     TextStyle style = Theme.of(context).textTheme.headline4;
@@ -17,7 +17,7 @@ class _CalcTwoState extends State<CalcTwo> {
     Size screen = MediaQuery.of(context).size;
 
     double buttonSize = screen.width / 4 - 5;
-    double displayHeight = screen.height - (buttonSize * 5) - height - 22;
+    double displayHeight = screen.height - (buttonSize * 5) - height - 18;
 
     return Scaffold(
       appBar: new AppBar(
@@ -92,7 +92,11 @@ class _CalcTwoState extends State<CalcTwo> {
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   alignment: Alignment.centerRight,
-                  child: Text(userInput, style: style),
+                  child: Text(
+                    userInput,
+                    style: style,
+                    maxLines: 2,
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -193,10 +197,27 @@ class _CalcTwoState extends State<CalcTwo> {
                           ),
                         ),
                         onPressed: () {
-                          setState(() {
-                            userInput += '%';
-                            print(userInput);
-                          });
+                          setState(
+                            () {
+                              if (userInput.length > 0) {
+                                if (userInput.contains("%")) {
+                                } else if (userInput.endsWith("+") ||
+                                    userInput.endsWith("-") ||
+                                    userInput.endsWith("X") ||
+                                    userInput.endsWith("\u00f7") ||
+                                    userInput.endsWith(".")) {
+                                  userInput = userInput.substring(
+                                          0, userInput.length - 1) +
+                                      "%";
+
+                                  print(userInput.length);
+                                } else {
+                                  userInput += '%';
+                                  print(userInput);
+                                }
+                              }
+                            },
+                          );
                         },
                       ),
                       decoration: BoxDecoration(
@@ -220,7 +241,21 @@ class _CalcTwoState extends State<CalcTwo> {
                         ),
                         onPressed: () {
                           setState(() {
-                            userInput += '\u00f7';
+                            if (userInput.length > 0) {
+                              if (userInput.contains("\u00f7")) {
+                              } else if (userInput.endsWith("+") ||
+                                  userInput.endsWith("-") ||
+                                  userInput.endsWith("X") ||
+                                  userInput.endsWith("%") ||
+                                  userInput.endsWith(".")) {
+                                userInput = userInput.substring(
+                                        0, userInput.length - 1) +
+                                    "\u00f7";
+                              } else {
+                                userInput += '\u00f7';
+                                print(userInput);
+                              }
+                            }
                           });
                         },
                       ),
@@ -316,7 +351,21 @@ class _CalcTwoState extends State<CalcTwo> {
                         ),
                         onPressed: () {
                           setState(() {
-                            userInput += 'X';
+                            if (userInput.length > 0) {
+                              if (userInput.contains("X")) {
+                              } else if (userInput.endsWith("+") ||
+                                  userInput.endsWith("-") ||
+                                  userInput.endsWith("\u00f7") ||
+                                  userInput.endsWith("%") ||
+                                  userInput.endsWith(".")) {
+                                userInput = userInput.substring(
+                                        0, userInput.length - 1) +
+                                    "X";
+                              } else {
+                                userInput += 'X';
+                                print(userInput);
+                              }
+                            }
                           });
                         },
                       ),
@@ -412,7 +461,21 @@ class _CalcTwoState extends State<CalcTwo> {
                         ),
                         onPressed: () {
                           setState(() {
-                            userInput += '-';
+                            if (userInput.length > 0) {
+                              if (userInput.contains("-")) {
+                              } else if (userInput.endsWith("+") ||
+                                  userInput.endsWith("X") ||
+                                  userInput.endsWith("\u00f7") ||
+                                  userInput.endsWith("%") ||
+                                  userInput.endsWith(".")) {
+                                userInput = userInput.substring(
+                                        0, userInput.length - 1) +
+                                    "-";
+                              } else {
+                                userInput += '-';
+                                print(userInput);
+                              }
+                            }
                           });
                         },
                       ),
@@ -508,7 +571,21 @@ class _CalcTwoState extends State<CalcTwo> {
                         ),
                         onPressed: () {
                           setState(() {
-                            userInput += '+';
+                            if (userInput.length > 0) {
+                              if (userInput.contains("+")) {
+                              } else if (userInput.endsWith("X") ||
+                                  userInput.endsWith("-") ||
+                                  userInput.endsWith("\u00f7") ||
+                                  userInput.endsWith("%") ||
+                                  userInput.endsWith(".")) {
+                                userInput = userInput.substring(
+                                        0, userInput.length - 1) +
+                                    "+";
+                              } else {
+                                userInput += '+';
+                                print(userInput);
+                              }
+                            }
                           });
                         },
                       ),
@@ -575,9 +652,24 @@ class _CalcTwoState extends State<CalcTwo> {
                           style: style,
                         ),
                         onPressed: () {
-                          setState(() {
-                            userInput += '.';
-                          });
+                          setState(
+                            () {
+                              if (userInput.contains(".")) {
+                              } else {
+                                if (userInput.length > 0) {
+                                  if (userInput.contains(".")) {
+                                  } else if (userInput.endsWith("+") ||
+                                      userInput.endsWith("-") ||
+                                      userInput.endsWith("\u00f7") ||
+                                      userInput.endsWith("%")) {
+                                  } else {
+                                    userInput += '.';
+                                    print(userInput);
+                                  }
+                                }
+                              }
+                            },
+                          );
                         },
                       ),
                       decoration: BoxDecoration(
